@@ -10,5 +10,7 @@ namespace TestCoursesAPI.Services
     public interface ICoursesService
     {
         List<CourseLiteDTO> GetCourseBySemester(string semester);
+
+        CourseBigDTO GetCourseDetails(int id);
     }
 }

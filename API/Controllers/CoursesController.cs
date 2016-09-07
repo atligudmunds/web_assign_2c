@@ -30,5 +30,12 @@ namespace TestCoursesAPI.API.Controllers
             return _service.GetCourseBySemester(semester);
             
         }
+
+        [HttpGet("{id}")]
+        public CourseBigDTO GetDetailsOfCourse(int id)
+        {
+            return _service.GetCourseDetails(id);
+        }
+
     }
 }
