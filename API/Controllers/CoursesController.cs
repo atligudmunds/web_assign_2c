@@ -28,13 +28,61 @@ namespace TestCoursesAPI.API.Controllers
             }
 
             return _service.GetCourseBySemester(semester);
-            
         }
 
         [HttpGet("{id}")]
-        public CourseBigDTO GetDetailsOfCourse(int id)
+        public IActionResult GetDetailsOfCourse(int id)
         {
-            return _service.GetCourseDetails(id);
+            CourseBigDTO temp = _service.GetCourseDetails(id);
+            if(temp == null)
+            {
+                return NotFound();
+            }
+            return new ObjectResult(temp);
+            //return _service.GetCourseDetails(id);
+        }
+
+        [HttpGet("{id}/students")]
+        public List<StudentDTO> GetStudentsByCourse(int id)
+        {
+            //StudentDTO temp = _service.GetStudents(id);
+            return _service.GetStudents(id);
+        }
+
+
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateCourse(int id, [FromBody] EditCourseViewModel item)
+        {
+            if(item == null)
+            {
+                return BadRequest();
+            }
+
+            bool result = _service.UpdateCourse(id, item.StartDate, item.EndDate);
+            if(result == false)
+            {
+                return NotFound();
+            }
+            return new NoContentResult();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCourseById(int id)
+        {
+            bool result = _service.DeleteCourse(id);
+            if(result == false)
+            {
+                return NotFound();
+            }
+            return new NoContentResult();
+        }
+
+        [HttpPost("{id/students}")]
+        public IActionResult AddStudentToCourse(int id, [FromBody] StudentDTO item)
+        {
+            _service.AddStudent(id, item);
+            return new NoContentResult();
         }
 
     }

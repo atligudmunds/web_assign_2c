@@ -12,5 +12,13 @@ namespace TestCoursesAPI.Services
         List<CourseLiteDTO> GetCourseBySemester(string semester);
 
         CourseBigDTO GetCourseDetails(int id);
+
+        bool UpdateCourse(int id, String newStartDate, String newEndDate);
+
+        bool DeleteCourse(int id);
+
+        List<StudentDTO> GetStudents(int id);
+
+        void AddStudent(int id, StudentDTO item);
     }
 }

@@ -12,6 +12,8 @@ namespace TestCoursesAPI.Services
     public class AppDataContext : DbContext
     {
         public DbSet<Course> Courses { get; set; }
+        public DbSet<EnrollmentObj> Enrollment { get; set; }
+        public DbSet<StudentObj> Student { get; set; }
 
         public AppDataContext(DbContextOptions<AppDataContext> options)
             : base(options)
